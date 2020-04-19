@@ -1,0 +1,144 @@
+A. Arrays
+
+import numpy as np
+
+arr = np.array([[0, 1, 2], [3, 4, 5]],
+               dtype=np.float32)
+print(repr(arr))
+
+B. Copying
+
+a = np.array([0, 1])
+b = np.array([9, 8])
+c = a
+print('Array a: {}'.format(repr(a)))
+c[0] = 5
+print('Array a: {}'.format(repr(a)))
+
+d = b.copy()
+d[0] = 6
+print('Array b: {}'.format(repr(b)))
+
+C. Casting
+
+arr = np.array([0, 1, 2])
+print(arr.dtype)
+arr = arr.astype(np.float32)
+print(arr.dtype)
+
+D. NaN
+
+arr = np.array([np.nan, 1, 2])
+print(repr(arr))
+
+arr = np.array([np.nan, 'abc'])
+print(repr(arr))
+
+# Will result in a ValueError
+np.array([np.nan, 1, 2], dtype=np.int32)
+
+E. Infinity
+
+print(np.inf > 1000000)
+
+arr = np.array([np.inf, 5])
+print(repr(arr))
+
+arr = np.array([-np.inf, 1])
+print(repr(arr))
+
+# Will result in an OverflowError
+np.array([np.inf, 3], dtype=np.int32)
+
+NumPy Basics
+
+A. Ranged data
+
+arr = np.arange(5)
+print(repr(arr))
+
+arr = np.arange(5.1)
+print(repr(arr))
+
+arr = np.arange(-1, 4)
+print(repr(arr))
+
+arr = np.arange(-1.5, 4, 2)
+print(repr(arr))
+
+The output of np.arange is specified as follows:
+
+If only a single number, n, is passed in as an argument, np.arange will return an array with all the integers in the range [0, n). Note: the lower end is inclusive while the upper end is exclusive.
+For two arguments, m and n, np.arange will return an array with all the integers in the range [m, n).
+For three arguments, m, n, and s, np.arange will return an array with the integers in the range [m, n) using a step size of s.
+Like np.array, np.arange performs upcasting. It also has the dtype keyword argument to manually cast the array.
+
+To specify the number of elements in the returned array, rather than the step size, we can use the np.linspace function.
+
+B. Reshaping data
+
+arr = np.arange(8)
+
+reshaped_arr = np.reshape(arr, (2, 4))
+print(repr(reshaped_arr))
+print('New shape: {}'.format(reshaped_arr.shape))
+
+reshaped_arr = np.reshape(arr, (-1, 2, 2))
+print(repr(reshaped_arr))
+print('New shape: {}'.format(reshaped_arr.shape))
+
+While the np.reshape function can perform any reshaping utilities we need, NumPy provides an inherent function for flattening an array. Flattening an array reshapes it into a 1D array. Since we need to flatten data quite often, it is a useful function.
+
+The code below flattens an array using the inherent flatten function.
+
+arr = np.arange(8)
+print(repr(arr))
+arr = np.reshape(arr, (2, 4))
+flattened = arr.flatten()
+print(repr(arr))
+print('arr shape: {}'.format(arr.shape))
+print(repr(flattened))
+print('flattened shape: {}'.format(flattened.shape))
+
+C. Transposing
+
+arr = np.arange(8)
+arr = np.reshape(arr, (4, 2))
+transposed = np.transpose(arr)
+print(repr(arr))
+print('arr shape: {}'.format(arr.shape))
+print(repr(transposed))
+print('transposed shape: {}'.format(transposed.shape))
+
+The function takes in a required first argument, which will be the array we want to transpose. It also has a single keyword argument called axes, which represents the new permutation of the dimensions.
+
+arr = np.arange(24)
+arr = np.reshape(arr, (3, 4, 2))
+transposed = np.transpose(arr, axes=(1, 2, 0))
+print('arr shape: {}'.format(arr.shape))
+print('arr: {}'.format(repr(arr)))
+
+print('transposed shape: {}'.format(transposed.shape))
+print('transposed: {}'.format(repr(transposed)))
+
+D. Zeros and ones
+
+arr = np.zeros(4)
+print(repr(arr))
+
+arr = np.ones((2, 3))
+print(repr(arr))
+
+arr = np.ones((2, 3), dtype=np.int32)
+print(repr(arr))
+
+If we want to create an array of 0's or 1's with the same shape as another array, we can use np.zeros_like and np.ones_like.
+
+arr = np.array([[1, 2], [3, 4]])
+print(repr(np.zeros_like(arr)))
+
+arr = np.array([[0., 1.], [1.2, 4.]])
+print(repr(np.ones_like(arr)))
+print(repr(np.ones_like(arr, dtype=np.int32)))
+
+
